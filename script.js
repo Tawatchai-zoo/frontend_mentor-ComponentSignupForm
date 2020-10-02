@@ -8,8 +8,46 @@ passWord = document.forms['form-register']['password'];
 
 document.forms['form-register'].onsubmit =  ()=>{
     checkEvery = 0;
-    // First Name
-    if(firstName.value.trim() === '') {
+
+    checkInput(firstName);
+    checkInput(lastName);
+    checkInput(email, isEmail);
+    checkInput(passWord);
+
+    if(checkEvery === 1) {
+        return false
+    }
+}
+
+function checkInput(dom, domEmail) {
+
+    if(dom.value.trim() === '') {
+        dom.style.border = '2px solid var(--red)';
+        dom.style.color = 'var(--red)';
+        dom.querySelector(`#${dom.id} + label`).style.display = 'block';
+        dom.querySelector(`#${dom.id} ~ .error-icon`).style.display = 'block';
+        checkEvery = 1;
+    }
+    else {
+        dom.style.border = '1px solid rgb(214, 214, 214)';
+        dom.style.color = '#000';
+        dom.querySelector(`#${dom.id} + label`).style.display = 'none';
+        dom.querySelector(`#${dom.id} ~ .error-icon`).style.display = 'none';
+    }
+
+    if(domEmail) {
+        if(domEmail(dom.value) === false) {
+            dom.style.border = '2px solid var(--red)';
+            dom.style.color = 'var(--red)';
+            dom.querySelector(`#${dom.id} + label`).style.display = 'block';
+            dom.querySelector(`#${dom.id} ~ .error-icon`).style.display = 'block';
+            checkEvery = 1;
+        }
+    }
+    
+    // Another way *****************************************************************************************************************************************************
+
+    /* if(firstName.value.trim() === '') {
         firstName.style.border = '2px solid var(--red)';
         document.querySelector('#firstname + label').style.display = 'block';
         document.querySelector('#firstname ~ .error-icon').style.display = 'block';
@@ -66,7 +104,7 @@ document.forms['form-register'].onsubmit =  ()=>{
     }
     else {
         return true
-    }
+    } */
 }
 
 function isEmail(email) {
