@@ -6,13 +6,7 @@ lastName = document.forms['form-register']['lastname'];
 email = document.forms['form-register']['email'];
 passWord = document.forms['form-register']['password'];
 
-// document.getElementById('submit').addEventListener('click', (e)=> {
-//     e.preventDefault();
-//     //cancel submit execute
-//     checkInput();
-// });
-
-function checkInput() {
+document.forms['form-register'].onsubmit =  ()=>{
     checkEvery = 0;
     // First Name
     if(firstName.value.trim() === '') {
